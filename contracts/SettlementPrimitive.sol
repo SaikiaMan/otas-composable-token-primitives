@@ -16,7 +16,6 @@ pragma solidity ^0.8.20;
 */
 
 contract SettlementPrimitive {
-
     enum SettlementStatus {
         Pending,
         Processing,
@@ -25,25 +24,15 @@ contract SettlementPrimitive {
     }
 
     struct Settlement {
-
         uint256 settlementId;
-
         address from;
-
         address to;
-
         uint256 assetId;
-
         uint256 amount;
-
         string sourceChain;
-
         string destinationChain;
-
         SettlementStatus status;
-
         uint256 createdAt;
-
         uint256 settledAt;
     }
 
@@ -65,41 +54,25 @@ contract SettlementPrimitive {
     );
 
     function createSettlement(
-
         address to,
-
         uint256 assetId,
-
         uint256 amount,
-
         string memory sourceChain,
-
         string memory destinationChain
-
-    ) external returns(uint256) {
+    ) external returns (uint256) {
 
         settlementCounter++;
 
         settlements[settlementCounter] = Settlement({
-
             settlementId: settlementCounter,
-
             from: msg.sender,
-
             to: to,
-
             assetId: assetId,
-
             amount: amount,
-
             sourceChain: sourceChain,
-
             destinationChain: destinationChain,
-
             status: SettlementStatus.Pending,
-
             createdAt: block.timestamp,
-
             settledAt: 0
         });
 
@@ -114,10 +87,7 @@ contract SettlementPrimitive {
         return settlementCounter;
     }
 
-    function markProcessing(
-        uint256 settlementId
-    ) external {
-
+    function markProcessing(uint256 settlementId) external {
         Settlement storage settlement =
             settlements[settlementId];
 
@@ -134,10 +104,7 @@ contract SettlementPrimitive {
         );
     }
 
-    function executeSettlement(
-        uint256 settlementId
-    ) external {
-
+    function executeSettlement(uint256 settlementId) external {
         Settlement storage settlement =
             settlements[settlementId];
 
@@ -156,10 +123,7 @@ contract SettlementPrimitive {
         );
     }
 
-    function markFailed(
-        uint256 settlementId
-    ) external {
-
+    function markFailed(uint256 settlementId) external {
         Settlement storage settlement =
             settlements[settlementId];
 
@@ -173,8 +137,7 @@ contract SettlementPrimitive {
 
     function getSettlement(
         uint256 settlementId
-    ) external view returns(Settlement memory) {
-
+    ) external view returns (Settlement memory) {
         return settlements[settlementId];
     }
 }
