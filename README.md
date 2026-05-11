@@ -38,3 +38,7 @@ The proposed model introduces:
 - Compliance Primitive
 - Metadata Primitive
 - Settlement Primitive
+
+## License
+
+Licensed under Apache License 2.0. See [LICENSE](LICENSE).
